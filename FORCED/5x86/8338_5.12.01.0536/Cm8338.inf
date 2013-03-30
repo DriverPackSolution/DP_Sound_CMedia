@@ -1,0 +1,194 @@
+; Copyright 1999-2000, C-Media Inc.
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%CMMfgName%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=09/26/2000,5.12.01.0536
+CatalogFile=cmpci.cat
+
+[SourceDisksNames]
+100="C-Media WDM Audio Driver Disk","",0
+
+[SourceDisksFiles]
+cmpci.sys=100
+cmpci.cat=100
+
+[Manufacturer]
+%CMMfgName%=CMEDIA
+
+;
+; Mechanism for excluding drivers from the "Add New Hardware" list.
+;
+[ControlFlags]
+ExcludeFromSelect=*
+
+[CMEDIA]
+%*WDM_CMI8338.DeviceDesc%=WDM_CMPCI,  PCI\VEN_13F6&DEV_0100&SUBSYS_FFFF13F6,PCI\VEN_13F6&DEV_0100    ;CM8338A
+%*WDM_CMI8338.DeviceDesc%=WDM_CMPCI,  PCI\VEN_10B9&DEV_0100&SUBSYS_FFFF10B9
+%*WDM_CMI8338.DeviceDesc%=WDM_CMPCI,  PCI\VEN_13F6&DEV_0101&SUBSYS_010113F6    ;CM8338B
+%MS_MPU401.DeviceDesc%   =MPU401,     MPU401,   *PNPB006
+;%GAME.DeviceDesc%        =GAME,       GAMEPORT, *PNPB02F
+
+[WDM_CMPCI]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=CMPCI.CopyList
+AddReg=WDM_CMPCI.AddReg, Mixer_CMPCI.AddReg
+
+[WDM_CMPCI.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,WDM_CMPCI.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[WDM_CMPCI.Interface.Wave]
+AddReg=WDM_PCI.Interface.Wave.AddReg
+[WDM_PCI.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_CMPCI.Wave.szPname%
+
+[WDM_CMPCI.Interface.Topology]
+AddReg=WDM_PCI.Interface.Topo.AddReg
+;; warning!! must be "Topo" because "Topology" is too long
+[WDM_PCI.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_CMPCI.Topology.szPname%
+
+[WDM_CMPCI.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,CMPCI.SYS
+HKR,,NTMPDriver,,"CMPCI.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%*WDM_CMPCI.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_CMPCI.DeviceDesc%
+
+[Mixer_CMPCI.AddReg]
+HKR,"Settings","LeftMasterVol",   0x00010001,0xF8,0,0,0
+HKR,"Settings","RightMasterVol",  0x00010001,0xF8,0,0,0
+HKR,"Settings","LeftWaveVol",     0x00010001,0xF0,0,0,0
+HKR,"Settings","RightWaveVol",    0x00010001,0xF0,0,0,0
+HKR,"Settings","LeftMidiVol",     0x00010001,0xD0,0,0,0
+HKR,"Settings","RightMidiVol",    0x00010001,0xD0,0,0,0
+HKR,"Settings","LeftCDVol",       0x00010001,0xD0,0,0,0
+HKR,"Settings","RightCDVol",      0x00010001,0xD0,0,0,0
+HKR,"Settings","LeftLineInVol",   0x00010001,0xD0,0,0,0
+HKR,"Settings","RightLineInVol",  0x00010001,0xD0,0,0,0
+HKR,"Settings","MicVol",          0x00010001,0xD0,0,0,0
+HKR,"Settings","PcSpkrVol",       0x00010001,0x00,0,0,0
+HKR,"Settings","OutputMixer",     0x00010001,0x1E,0,0,0
+HKR,"Settings","LeftInputMixer",  0x00010001,0x55,0,0,0
+HKR,"Settings","RightInputMixer", 0x00010001,0x2B,0,0,0
+HKR,"Settings","Reg24h",          0x00010001,0x00,0,0,0
+HKR,"Settings","Reg25h",          0x00010001,0x01,0,0,0
+HKR,"Settings","AuxVol",          0x00010001,0xBB,0,0,0
+
+[GAME]
+Include=joystick.inf
+Needs=MSJSTICK
+
+[MPU401]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, WDMAUDIO.MPU401
+
+[MPU401.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+
+[WDM.Interface.UART]
+AddReg=WDM.Interface.UART.AddReg
+[WDM.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.UART.szPname%
+
+[WDM.Interface.FMSynth]
+AddReg=WDM.Interface.FMSynth.AddReg
+[WDM.Interface.FMSynth.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.FMSynth.szPname%
+
+[DestinationDirs]
+CMPCI.CopyList      = 10,system32\drivers ; %SystemRoot%\system32\drivers
+DefaultDestDir      = 11
+
+[CMPCI.CopyList]
+cmpci.sys
+
+;;**************** NT Install ****************
+
+[WDM_CMPCI.NTx86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=CMPCI.CopyList
+AddReg=WDM_CMPCI.AddReg, Mixer_CMPCI.AddReg
+
+[WDM_CMPCI.NTx86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,WDM_CMPCI.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[WDM_CMPCI.NTx86.Services]
+AddService = cmpci,  0x00000002, cmpci_Service_Inst
+
+[cmpci_Service_Inst]
+DisplayName    = %cmpci.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\cmpci.sys
+
+[GAME.NTx86]
+Include=gameport.inf
+Needs=GamePort_Device
+
+[MPU401.NTx86]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, WDMAUDIO.MPU401
+
+[Strings]
+MSFT="Microsoft"
+CMMfgName="C-Media"
+*WDM_CMI8338.DeviceDesc="C-Media CM8338 Audio Driver (WDM)"
+*WDM_CMPCI.DeviceDesc="C-Media PCI Audio Driver (WDM)"
+WDM_CMPCI.Wave.szPname="C-Media PCI"
+WDM_CMPCI.Topology.szPname="C-Media PCI"
+
+MS_MPU401.DeviceDesc="C-Media MPU-401 Driver (WDM)"
+GAME.DeviceDesc="C-Media Game port"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+WDM_MIDI="WDM-based Device"
+
+Proxy.CLSID=        "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_FMSynth="FMSynth"
+KSNAME_Topology="Topology"
+
+WDM.UART.szPname="MPU-401"
+WDM.FMSynth.szPname="FM Synthesizer"
+
+cmpci.SvcDesc = "C-Media PCI Audio Driver (WDM)"

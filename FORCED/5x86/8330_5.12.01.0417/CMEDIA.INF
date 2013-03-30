@@ -1,0 +1,329 @@
+; Copyright 1999, C-Media Inc.
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%MSFT%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=01/11/2000,5.12.01.0417
+CatalogFile=cmpci.cat
+CatalogFile.NTx86=cmpci.cat
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+
+[SourceDisksNames]
+100="C-Media WDM Audio Driver Disk","",0
+
+[SourceDisksFiles]
+cmpci.sys=100
+cmpci.cat=100
+
+[Manufacturer]
+%CMMfgName%=CMEDIA
+
+;
+; Mechanism for excluding drivers from the "Add New Hardware" list.
+;
+[ControlFlags]
+ExcludeFromSelect=ISAPNP\CMI0001_DEV0000,ISAPNP\CMI0001_DEV0001,ISAPNP\CMI0001_DEV0002,ISAPNP\CMI0001_DEV0003
+ExcludeFromSelect=PCI\VEN_13F6&DEV_0100&SUBSYS_FFFF13F6
+ExcludeFromSelect=PCI\VEN_13F6&DEV_0100
+ExcludeFromSelect=PCI\VEN_10B9&DEV_0100&SUBSYS_FFFF10B9
+ExcludeFromSelect=PCI\VEN_13F6&DEV_0101&SUBSYS_010113F6
+ExcludeFromSelect=PCI\VEN_13F6&DEV_0111&SUBSYS_011113F6
+
+;; *EXCLUDE is a made up ID to prevent rank 1 drivers from showing in list.
+;ExcludeFromSelect = *EXCLUDE
+
+[CMEDIA]
+%*WDM_CMI8330.DeviceDesc%=WDM_CMI8330,ISAPNP\CMI0001_DEV0000
+%MS_MPU401.DeviceDesc%   =MPU401,     ISAPNP\CMI0001_DEV0001
+%GAME.DeviceDesc%        =GAME,       ISAPNP\CMI0001_DEV0002
+%SB16.DeviceDesc%        =WDM_SB16,   ISAPNP\CMI0001_DEV0003
+%*WDM_CMI8338.DeviceDesc%=WDM_CMPCI,  PCI\VEN_13F6&DEV_0100&SUBSYS_FFFF13F6,PCI\VEN_13F6&DEV_0100    ;CM8338A
+%*WDM_CMI8338.DeviceDesc%=WDM_CMPCI,  PCI\VEN_10B9&DEV_0100&SUBSYS_FFFF10B9
+%*WDM_CMI8338.DeviceDesc%=WDM_CMPCI,  PCI\VEN_13F6&DEV_0101&SUBSYS_010113F6    ;CM8338B
+%*WDM_CMI8738.DeviceDesc%=WDM_CMPCI,  PCI\VEN_13F6&DEV_0111&SUBSYS_011113F6    ;CM8738
+%MS_MPU401.DeviceDesc%   =MPU401,     MPU401,   *PNPB006
+;%GAME.DeviceDesc%        =GAME,       GAMEPORT, *PNPB02F
+
+[STUB_DEVICE]
+
+[GAME]
+Include=joystick.inf
+Needs=MSJSTICK
+
+[WDM_CMI8330]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=CMI8330.CopyList
+AddReg=WDM_CMI8330.AddReg
+
+[WDM_CMI8330.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_CMI8330.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_CMI8330.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_CMI8330.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_CMI8330.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[WDM_CMI8330.Interface.Wave]
+AddReg=WDM_8330.Interface.Wave.AddReg
+[WDM_8330.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_CMI8330.Wave.szPname%
+
+[WDM_CMI8330.Interface.Topology]
+AddReg=WDM_8330.Interface.Topo.AddReg
+;; warning!! must be "Topo" because "Topology" is too long
+[WDM_8330.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_CMI8330.Topology.szPname%
+
+[WDM_CMPCI]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=CMPCI.CopyList
+AddReg=WDM_CMPCI.AddReg
+
+[WDM_CMPCI.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_CMPCI.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[WDM_CMPCI.Interface.Wave]
+AddReg=WDM_PCI.Interface.Wave.AddReg
+[WDM_PCI.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_CMPCI.Wave.szPname%
+
+[WDM_CMPCI.Interface.Topology]
+AddReg=WDM_PCI.Interface.Topo.AddReg
+;; warning!! must be "Topo" because "Topology" is too long
+[WDM_PCI.Interface.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_CMPCI.Topology.szPname%
+
+[WDM.Interface.UART]
+AddReg=WDM.Interface.UART.AddReg
+[WDM.Interface.UART.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.UART.szPname%
+
+[WDM.Interface.FMSynth]
+AddReg=WDM.Interface.FMSynth.AddReg
+[WDM.Interface.FMSynth.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM.FMSynth.szPname%
+
+[WDM_CMI8330.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,CM8330.SYS
+HKR,,NTMPDriver,,"CM8330.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%*WDM_CMI8330.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_CMI8330.DeviceDesc%
+
+[WDM_CMPCI.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,CMPCI.SYS
+HKR,,NTMPDriver,,"CMPCI.sys,sbemul.sys"
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%*WDM_CMPCI.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%WDM_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%*WDM_CMPCI.DeviceDesc%
+
+[MPU401]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, WDMAUDIO.MPU401
+
+[MPU401.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+
+[WDM_SB16]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=MSSB16.CopyList
+AddReg=WDM_SB16.AddReg
+
+[WDM_SB16.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_SB16.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_SB16.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_SB16.Interface.Wave
+
+[WDM_SB16.Interface.Wave]
+AddReg=WDM_SB16.Interface.Wave.AddReg
+[WDM_SB16.Interface.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%WDM_SB16.Wave.szPname%
+
+[WDM_SB16.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,cm8330sb.SYS
+HKR,,NTMPDriver,,"cm8330sb.sys"
+
+HKR,Drivers,SubClasses,,"wave"
+
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%SB16.DeviceDesc%
+
+[DestinationDirs]
+CMI8330.CopyList      = 10,system32\drivers ; %SystemRoot%\system32\drivers
+CMPCI.CopyList        = 10,system32\drivers ; %SystemRoot%\system32\drivers
+MSSB16.CopyList       = 10,system32\drivers ; %SystemRoot%\system32\drivers
+DefaultDestDir        = 11
+
+[CMI8330.CopyList]
+cm8330.sys
+
+[CMPCI.CopyList]
+cmpci.sys
+
+[MSSB16.CopyList]
+cm8330sb.sys
+
+;;**************** NT Install ****************
+
+[STUB_DEVICE.NT]
+
+[GAME.NT]
+Include=gameport.inf
+Needs=GamePort_Device.NT
+
+[MPU401.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration, WDMAUDIO.MPU401
+
+[WDM_CMI8330.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=CMI8330.CopyList
+AddReg=WDM_CMI8330.AddReg
+
+[WDM_CMPCI.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=CMPCI.CopyList
+AddReg=WDM_CMPCI.AddReg
+
+[WDM_CMI8330.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_CMI8330.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_CMI8330.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_CMI8330.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_CMI8330.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[WDM_CMPCI.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_CMPCI.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,WDM_CMPCI.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,WDM.Interface.UART
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FMSynth%,WDM.Interface.FMSynth
+
+[STUB_DEVICE.NT.Services]
+AddService = ,0x2
+
+[GAME.NT.Services]
+AddService=,0x2
+
+[WDM_CMI8330.NT.Services]
+AddService = cm8330,  0x00000002, cm8330_Service_Inst
+
+[WDM_CMPCI.NT.Services]
+AddService = cmpci ,  0x00000002, cmpci_Service_Inst
+
+[WDM_SB16.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=MSSB16.CopyList
+AddReg=WDM_SB16.AddReg
+
+[WDM_SB16.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,WDM_SB16.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,WDM_SB16.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,WDM_SB16.Interface.Wave
+
+[WDM_SB16.NT.Services]
+AddService = sb16,    0x00000002, sndblst_Service_Inst
+
+[cm8330_Service_Inst]
+DisplayName    = %cm8330.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\cm8330.sys
+
+[cmpci_Service_Inst]
+DisplayName    = %cmpci.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\cmpci.sys
+
+[sndblst_Service_Inst]
+DisplayName    = %sndblst.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\cm8330sb.sys
+
+[Strings]
+MSFT="Microsoft"
+CMMfgName="C-Media"
+*WDM_CMI8330.DeviceDesc="C-Media CM8330 Audio Driver (WDM)"
+WDM_CMI8330.Wave.szPname="C-Media 8330"
+WDM_CMI8330.Topology.szPname="C-Media 8330"
+*WDM_CMI8338.DeviceDesc="C-Media CM8338 Audio Driver (WDM)"
+*WDM_CMI8738.DeviceDesc="C-Media CM8738 Audio Driver (WDM)"
+*WDM_CMPCI.DeviceDesc="C-Media PCI Audio Driver (WDM)"
+WDM_CMPCI.Wave.szPname="C-Media PCI"
+WDM_CMPCI.Topology.szPname="C-Media PCI"
+
+MS_MPU401.DeviceDesc="C-Media MPU-401 Driver (WDM)"
+GAME.DeviceDesc="C-Media Game port"
+SB16.DeviceDesc="CM8330 SB16 Driver (WDM)"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+WDM_MIDI="WDM-based Device"
+
+Proxy.CLSID=        "{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSNAME_Wave="Wave"
+KSNAME_UART="UART"
+KSNAME_FMSynth="FMSynth"
+KSNAME_Topology="Topology"
+
+WDM.UART.szPname="MPU-401"
+WDM.FMSynth.szPname="FM Synthesizer"
+WDM_SB16.Wave.szPname="CM8330 SB16"
+
+cm8330.SvcDesc = "C-Media CM8330 Audio Driver (WDM)"
+cmpci.SvcDesc = "C-Media PCI Audio Driver (WDM)"
+sndblst.SvcDesc = "C-Media SB16 Driver (WDM)"

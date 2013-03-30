@@ -1,0 +1,298 @@
+0629a (Sensaura Library 2135)
+0629a.INF : add ecs model 1019&0A52 (lpc model)
+
+0629 (Sensaura Library 2135)
+STEP1.SYS : fix bugs : MPU401 crash system on 37 chip
+
+STEP2.SYS : Add a key called "DisableMPU401XP" in INF file to see if MPU401
+            should be disabled in Windows XP under the condition
+            "EnableLegacy = 1 or 3".
+
+============================================================================
+0628 (Sensaura Library 2135)
+STEP1.SYS : implement MPU401 as a PCI device interface rather than subdevice
+
+STEP2.SYS : fix the problem that XP HCT failed on driver verifier, it is
+            due to inappropriate processing on PnP IRP
+
+STEP3.SYS : 1. delete port event notify, because it has bugs in Win2000, WinME, and Win98
+            2. add 3 dummy mute node to overcome the HCT mixer driver test errors
+
+STEP4.SYS : fix MPU401 failed on KsDirectMusic test
+
+============================================================================
+0627 (Sensaura Library 2135)
+STEP1.SYS : 1. support Digital Right Management ---> Copy Protect
+
+STEP2.SYS : 1. support Digital Right Management ---> Digital Output Disable
+            2. delete the support of 11k, 16bit, mono format in DataRangeIntersection
+
+STEP3.SYS : 1. restore the support of 11k, 16bit, mono format in DataRangeIntersection,
+               since this is not a failure.
+
+STEP4.SYS : 1. Correct some errors in "KsStudio.exe". Remove the functions that support
+               supermix node. Use WaveFormatExtensible format in DataRangeIntersection.
+
+STEP5.SYS : 1. fix Digital Right Management ---> Digital Output Disable.
+
+STEP6.SYS : 1. Solve the fail in HCT, Wave driver test (close MPU401 and game),
+               WaveoutRestart.
+
+STEP7.SYS : 1. No change, only modify INF file to pass INF checker.
+
+STEP8.SYS : 1. Topology uses multiplexer acrhitecture.
+            2. Add Microphone gain, range 0dB ~ 12dB. Set by the key, "MicAddGainDB",
+               in INF file.
+
+STEP9.SYS : 1. Add three volume node (LineIn_WaveIn, Aux_WaveIn, CD_WaveIn) and use port
+               calss event to notify each other, if any change happens.
+
+STEP10.SYS : 1. Correct the error in driver verifier. The handler of port calss event
+                must be in non-paged memory.
+
+STEP11.SYS : 1. remove microphone add gain, restore renderer.cpp, and remove helper.cpp.
+
+STEP12.SYS : 1. remove stereo mix volume. when microphone gain = 0dB. do nothing.
+
+STEP13.SYS : 1. remove stereo mix volume.
+             2. when microphone gain = 0dB. do nothing. (Jhon).
+
+STEP14.SYS : 1. Correct the problem of "forget release dmachannel interface".
+                The function of this version is the same as STEP10.SYS.
+
+STEP15.SYS : 1. When OS is WindowsXP, 2000, ME, open MPU401 and game.
+             2. Add a private property "KSPROPERTY_CMAUDIO_MIXER_UI" to indicate
+                mixer.exe whether the Validity SpdifIn, CopyProtect Buttons should be
+                shown or not.
+             3. use new CMnprop.dll, which support interface "ICMAudioProperty2".
+
+INF : modify INF as the INF of 0625b
+============================================================================
+
+============================================================================
+0626 (Sensaura Library 2135)
+SYS : change ac-3 topology to resolve phantom controls problem on mixer
+
+0625a (Sensaura Library 2135)
+INF : add uninstall mechanism on driver package
+
+0625 (Sensaura Library 2135)
+STEP1.SYS : 1. remove limitations on MONITER_SPDIF_IN
+            2. disable MPU401 if PCI IRQ above 15 (for Intel 845 problem)
+INF :       multi-section sub-vender/sub-device
+============================================================================
+
+============================================================================
+0624b (Sensaura Library 2216)
+STEP1.SYS : 1. fix the problem of initialization failure of grapher
+INF       : Add uninstall mechanism on system
+
+0624a (Sensaura Library 2135)
+STEP1.SYS : 1. remove limitations on MONITER_SPDIF_IN
+            2. disable MPU401 if PCI IRQ above 15 (for Intel 845 problem)
+
+0624 (Sensaura Library 2135)
+STEP1.SYS : 1. Change the name PcSpeaker to MonoIn
+
+STEP2.SYS : 1. Open External Bass
+            2. modify pnp.cpp and pnp.h
+============================================================================
+
+0623 (Sensaura Library 2135)
+STEP1.SYS : 1. fix the power management problems with Sensaura
+
+STEP2.SYS : 1. Add "ADAPTER_DIGITAL_SHARED"
+
+0622 (Sensaura Library 2135)
+STEP1.SYS : 1. In "AdapterDispatchPower", when entering power state D3, we should
+               CloseStreamManager. Otherwise, system will be crashed, because
+               Sensaura rendering timer is still working.
+            2. In case we go to any sleep state we disconnect the interrupt service
+               reoutine from the interrupt.
+            3. Delete "retard closing StreamManager". It has no use now.
+            4. Solve the problem of "when Reverb is enabled and wave check box in
+               MS volume control is muted, we still can hear the reverb sound".
+
+STEP2.SYS : 1. In private property "KSPROPERTY_CMAUDIO_MISCELLANEOUS", "FuncLimited",
+               and "CutMSSpeakerConfig" can be get and set.
+
+STEP3.SYS : 1. Fix the problem in HCT wave driver "test case 9:36 sampling rate
+               accuracy". When the WaveIn format is other than 44k/48k, we should
+               fail that WaveIn capture in ValidateFormat. Then system will convert
+               itself.
+STEP4.SYS : 1. Correct the noise of MicAsCenterBass, when start and stop playing.
+            2. Use Sensaura's new library to set 3dBBoost=TRUE, and take multiply
+               coefficient 1.4 out.
+
+STEP5.SYS : 1. When set to the maximum left or right pan in wave control of the
+               Microsoft volume control, the front 2 speakers will all be muted.
+               (In STEP1.SYS, point 4, we made some mistake)
+            2. In step4, there is an eorror, "the LineInAsRear setting is not issued
+               to CMI8738 at Windows start up" (only in step4). We correct this
+               problem in step5.
+
+0621 (Sensaura Library 2135)
+STEP1.SYS : 1. The full function chip, can be used as FuncLimited LX chip.
+            2. When chip is FuncLimited, delete AC3-pin in WaveCyclicSB16.
+            3. When use 44k rendering for SPDIFOUT, we must receive a 2 channels
+               format from system, because the Sensaura library can't support
+               channel mixing st this time. (if we un-check Reverb, and use MCI
+               to play sound, the sound will be missing).
+            4. Correct the errors in LinInAsRear, LineInAsBass, MicAsBass.
+            5. In HCT test, retard closing StreamManager for 1 sec, if the sound
+               rendering time is less than 1 sec.
+
+               #define STREAM_MANAGER_DELAY_COUNT   400        // 1 unit = 2.5ms
+               #define STREAM_MANAGER_DUE_TIME      (-10000000)// 1 unit = 100ns
+
+STEP2.SYS : 1. The Matrox PCVCR problem: When recording is active, the rendering
+               should switch to DSSPEAKER_QUAD, only when the dwSpeakerConfig is
+               DSSPEAKER_5POINT1.
+
+STEP3.SYS : 1. When we multiply a coefficient 1.3 to the Sensaura rendered data,
+               the value may possibly overflow (> 32767 or < -32768), so we should
+               do the saturation in the MMX code (This is a temporally solution).
+
+STEP4.SYS : 1. When WinDVD play AC3 digital data, 039 chip use channels 1 to play,
+               037 use channel 0 to play, so we should mute channels 0, and 1
+               simultaneouly. Otherwise, noise will be heard. This solution can
+               cover all chip version.
+
+0620 (Sensaura Library 2135)
+STEP1.SYS : 1. After Sensaura rendering, multiply a coefficient 1.3 to increase
+               the signal level for HCT test of Sensaura WDM driver.
+            2. only Sensaura INF exists (HCTINF is cancelled).
+
+               #define VOLUME_COEFF1                13
+               #define VOLUME_COEFF2                20
+
+STEP2.SYS : 1. In INF file, use "CutMSSpeakerConfig" to disconnect the speaker
+               config from Microsoft control panel.
+
+STEP3.SYS : 1. When judging FuncLimited, chip 055 is inversed.
+            2. When chip is FuncLimited, ValidateFormat will fail the format,
+               KSDATAFORMAT_SUBTYPE_DOLBY_AC3_SPDIF.
+
+0619 (Sensaura Library 2135)
+STEP1.SYS : 1. PC Speaker mute
+            2. Microphone recording gain control (Boost when recording)
+            3. When playing a 6 channel wave during recording is active,
+               inform Sensaura and switch to 4 speakers.
+            4. In KSPROPERTY_CMAUDIO_MISCELLANEOUS property, add an item called,
+               EnableSensaura, to save ADAPTER_USE_SENSAURA in registry.
+
+STEP2.SYS : 1. In KSPROPERTY_CMAUDIO_SPDIF property, add an item called,
+               SamplingRate, to select rendering SPDIF on 44k or 48k
+            2. fix speaker geometry
+            3. fix Microphone recording gain control (stored in HWMixerExtSettings)
+
+STEP3.SYS : 1. fix the bug of "When recording is active, switch to 4 speakers"
+
+0618 (Sensaura Library 2135)
+STEP1.SYS : 1. Use multiplex node and sum node to select recording source in topology.
+               User can choose multiple sources in MS recording control
+               (traditional 8738 way).
+STEP2.SYS : 1. fix the problem that 037 chip 18H D24 cannot read correctly
+
+0617 (Sensaura Library 2135)
+STEP1.SYS : 1. Use multiplex node to select recording source in topology
+            2. "RecordMultiplex" in INF is used as the default selection (1-5)
+                RecordMultiplex = 1 ---> Wave
+                RecordMultiplex = 2 ---> Line In
+                RecordMultiplex = 3 ---> Aux
+                RecordMultiplex = 4 ---> CD
+                RecordMultiplex = 5 ---> Microphone
+                RecordMultiplex = 6 ---> All (Wave + LineIn + Aux + CD + Mic)
+            3. KSPROPERTY_CMAUDIO_CHIP_INFO can get CMI33, CMI37, CMI39, CMI55
+
+STEP2.SYS : 1. RecordMultiplex = 6 ---> decided by RecordSettings
+            2. Add the following property, which is used to determine the
+               private combined record-settings.
+                   KSPROPERTY_CMAUDIO_RECORD_SELECT = 9;
+
+0616 (Sensaura Library 2135)
+STEP1.SYS : 1. Solve the problem of MCI FALSE-Multi-Channel.
+               Use "Enable-Reverb" to control MCI 2 or 6 channels
+            2. Add the following properties
+                   KSPROPERTY_CMAUDIO_CHIP_INFO = 6;
+                   KSPROPERTY_CMAUDIO_CHANNEL_NUM = 7;
+                   KSPROPERTY_CMAUDIO_PLAY_6CHAN = 8;
+            3. Note that KSPROPERTY_CMAUDIO_PLAY_6CHAN can over-write
+               "Enable-Reverb" in KSPROPERTY_CMAUDIO_GLOBAL_REVERB
+            4. Disable ForceGenerateCenter/ForceCopyMode in property page
+
+
+0615 (Sensaura Library 2135)
+STEP1.SYS : Add a registry key, MasterVolAtten, which can cantrol the master volume
+            Attenuation.
+            MasterVolAtten's unit = dB, ex., 0x0001 = 1dB, 0x0002 = 2dB
+STEP2.SYS : Add 055 chip version judgement (by John)
+STEP3.SYS : 1. Mute LineIn, Aux, CD, and Mic, when volume level is 0
+            2. fix the bugs of reported maximum channels (=6, not 4),
+               but 033, 037, 039_As_037 the SpeakerConfig is limited to 4
+
+0614 (Sensaura Library 2135)
+STEP1.SYS : fix the bugs of speaker settings, the sound channels heard is coincident
+            with the speaker settings in mixer.exe now. The speaker settings of direct
+            sound is Microsoft's problem. It has no solution for the present.
+
+0613 (Sensaura Library 2135)
+STEP1.SYS : Sensaura update channels.cpp, common.cpp, mintopo.cpp, shared.h,
+            (in, ConvertLogToLin(int vol, int pan), a second augument is added)
+
+0612 (Sensaura Library 2135)
+STEP1.SYS : Sensaura library updated (fixed bugs on "Soldier of Fortune",
+            "Unreal Tournement")
+STEP2.SYS : 1. Force central generation on 6-channel
+            2. fix the bug of "AdapterCommon->QueryCapability return wrong BOOLEAN state"
+            3. fix the bug of "the set method of PropertyHandler_Miscellaneous always
+               return FALSE"
+STEP3.SYS : 1. Microphone gain control
+
+0611 (Sensaura Library 2133)
+STEP1.SYS : Wave Playback/Capture, Force CopyMode on private mixer(new dll)
+
+0610 (Sensaura Library 2133)
+STEP1.SYS : some modifications from SENSAURA
+
+0609 (Sensaura Library 2133)
+STEP1.SYS : h/w copy mode usage for A-A path Control
+            enable h/w bass as 5-channel activate
+
+0608 (Sensaura Library 2133)
+STEP1.SYS : add front left/right volume control to private mixer
+STEP2.SYS : optimise dma channel management (intermediate version)
+STEP3.SYS : optimise dma channel management
+STEP4.SYS : add chip capability query support (full function or LX/MX)
+
+0607 (Sensaura Library 2133)
+STEP1.SYS : support AC/3 over S/PDIF (buggy)
+STEP2.SYS : bug fixed (Working on PDVD3.0, WinME, ChipVer 37/39)
+            Mic Volume restoration after system suspension
+
+0606 (Sensaura Library 2133)
+STEP1.SYS : update to Sensaura Library 2133 (fix global reverbation on 2D stream)
+
+0605 (Sensaura Library 2128)
+---------
+STEP1.SYS : global reverbation, surround mode bug fixed
+STEP2.SYS : some Sensaura bug fixed
+STEP3.SYS :
+STEP4.SYS : software volume control for 4/6 channel
+STEP5.SYS : global reverbation interface
+STEP6.SYS : restore/save all settings automatically
+STEP7.SYS : full-duplex review
+STEP8.SYS : full-duplex 037/039 optimization
+STEP9.SYS : some bug fixed
+
+0604 (Sensaura Library 2120)
+--------
+0604.SYS : Private Property Page (support SPDIF)
+
+0603
+---------
+STEP6.SYS : 6-channel playback with Sensaura Library 2113A (buggy)
+STEP7.SYS : 6-channel playback bypass Sensaura Library 2113A
+STEP8.SYS : 6-channel playback with Sensaura Library 2120
+
+

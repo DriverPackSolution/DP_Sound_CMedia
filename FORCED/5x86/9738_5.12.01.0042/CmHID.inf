@@ -1,0 +1,103 @@
+
+
+;
+; from HIDDEV.INF as aux.
+;
+; - Installs default support for HID devices according to compatible id
+;
+; Copyright (c) 1998 Microsoft Corporation
+;
+
+[Version]
+CatalogFile=hiddev.cat
+LayoutFile=Layout.inf, Layout1.inf, Layout2.inf
+Signature="$CHICAGO$"
+Class=HID
+ClassGUID={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=Microsoft
+SetupClass=Base
+DriverVer =10/23/2003
+
+[BaseWinOptions]
+Inst_Hiddev
+
+[Inst_Hiddev]
+Copyfiles=Hid.Inf.Copy
+
+[Hid.Inf.Copy]
+hiddev.inf
+
+[DestinationDirs]
+DefaultDestDir = 11             ; LDID_SYS, the Windows\System directory
+HidClassCopy = 11
+HidClassDel = 25
+Hid.Inf.Copy   = 17             ; LDID_INF, the Windows\Inf directory
+USBHIDDevice.Copy = 10,system32\drivers
+USBHIDDevice.Del = 11
+HIDSystemControl.Copy = 11
+MMHID.Copy = 11
+MMHID.Del = 11
+
+[ClassInstall]
+AddReg=HIDClassReg
+CopyFiles=HidClassCopy
+DelFiles=HidClassDel
+
+[HIDClassReg]
+HKR,,,0,%HIDClassDescription%
+HKR,,Icon,,-24
+HKR,,Installer,,hidci.dll  ; the class installer forces RunOnce entries
+                           ; to be executed for all hid device installs
+
+[HidClassCopy]
+hidci.dll
+
+[HidClassDel]
+hidci.dll
+
+[ControlFlags]
+; All PnP devices should be excluded from manual AddDevice Applet list
+;ExcludeFromSelect=*
+
+[Manufacturer]
+%MfgName%=C-Media
+
+[C-Media]
+%USB\Class_03%=USBHIDDevice, USB\VID_0D8C&PID_0003&MI_02
+%USB\Class_03%=USBHIDDevice, USB\VID_0D8C&PID_000C&MI_03
+%USB\Class_03%=USBHIDDevice, USB\VID_0D8C&PID_000D&MI_03
+%USB\Class_03%=USBHIDDevice, USB\VID_0D8C&PID_0006&MI_03
+%USB\Class_03%=USBHIDDevice, USB\VID_0E5C&PID_6441&MI_03
+%USB\Class_03%=USBHIDDevice, USB\VID_0B0E&PID_8100&MI_03
+%USB\Class_03%=USBHIDDevice, USB\VID_06F8&PID_1000&MI_03
+%USB\Class_03%=USBHIDDevice, USB\VID_04E8&PID_7081&MI_03
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;  Install section for all USB HID devices  ;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[USBHIDDevice]
+CopyFiles=USBHIDDevice.Copy
+DelFiles =USBHIDDevice.Del
+AddReg   =USBHIDDevice.AddReg
+
+[USBHIDDevice.Copy]
+hidclass.sys
+hidusb.sys
+hidparse.sys
+
+[USBHIDDevice.Del]
+hidclass.sys
+hidusb.sys
+hidparse.sys
+
+[USBHIDDevice.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,"hidusb.sys"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[Strings]
+USB\Class_03="USB Human Interface Device"
+

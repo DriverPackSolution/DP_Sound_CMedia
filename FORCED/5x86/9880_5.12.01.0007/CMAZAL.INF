@@ -1,0 +1,321 @@
+; Copyright 1999-2004, C-Media Inc.
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%ProviderName%
+DriverVer=10/14/2004,5.12.01.0008
+CatalogFile=cmudax.cat
+
+[SourceDisksNames]
+222=%DiskDescription%,,,
+
+[SourceDisksFiles]
+cmudax.sys=222
+udaprop.dll=222
+cmids3d.dll=222
+Audio3D.dll=222
+cmicnfg.cpl=222
+cmirmdrv.exe=222
+cmirmdrv.dll=222
+cmudax.dll=222
+cmifltr.dll=222
+ImpTable.bin=222
+
+[Manufacturer]
+%MfgName%=C-Media
+
+[C-Media]
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00000001
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00000000
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00010000
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00020081
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00020082
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00010083
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00010084
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00010086
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00010087
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00020087
+
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_18791019
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_98801019
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_98811019
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_1B711019
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00701025
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_813D1043
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_816D1043
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_01711071
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_01651071
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_3197109F
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_3816109F
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_2A0E103C
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_2E0E103C
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_A43010FD
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_B02C144D
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_70331462
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_703A1462
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_70461462
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_705A1462
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_70621462
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_70911462
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_87021565
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_000B1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_000C1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_000D1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_000E1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_000F1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00101854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00111854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00121854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00131854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00141854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00151854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00161854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00171854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00181854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00191854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_001A1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_001B1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_001C1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_001D1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_001E1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_001F1854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00201854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00211854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_00221854
+%CMI9880.DeviceDesc%=Azalia,    HDAUDIO\FUNC_01&VEN_434D&DEV_4980&SUBSYS_A0051458
+
+[Azalia]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=CMUDA.CopyList, CMUDAProp.CopyList, C3D.CopyList, Audio3D.CopyList, Impedence.CopyList
+AddReg=CMUDA.AddReg, CMUDAProp.AddReg, Audio3D.AddReg, UDA_NAMES.AddReg
+
+[Azalia.HW]
+AddReg = CMUDASecurity.AddReg
+
+[Azalia.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearWave%,Azalia.RearWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_RearWave%,Azalia.RearWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_RearWave%,Azalia.RearWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RearTopo%,Azalia.RearTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RearTopo%,Azalia.RearTopo
+
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPWave%, Azalia.FrontWave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_FPWave%, Azalia.FrontWave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_FPWave%,Azalia.FrontWave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_FPTopo%, Azalia.FrontTopo
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_FPTopo%, Azalia.FrontTopo
+
+[Azalia.Services]
+AddService = cmudax, 0x00000002, CMUDA_Service_Inst
+
+[CMUDA_Service_Inst]
+DisplayName   = %CMUDA.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\cmudax.sys
+
+[Azalia.RearWave]
+AddReg=Azalia.RearWave.AddReg
+
+[Azalia.RearWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%RearWave.szPname%
+
+[Azalia.RearTopo]
+AddReg=Azalia.RearTopo.AddReg
+
+[Azalia.RearTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%RearTopo.szPname%
+
+[Azalia.FrontWave]
+AddReg=Azalia.FrontWave.AddReg
+
+[Azalia.FrontWave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FrontWave.szPname%
+
+[Azalia.FrontTopo]
+AddReg=Azalia.FrontTopo.AddReg
+
+[Azalia.FrontTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%FrontTopo.szPname%
+
+[CMUDA.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,cmudax.sys
+HKR,,NTMPDriver,,"cmudax.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%CMUDA.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%CMUDA.DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%CMUDA.DeviceDesc%
+;;HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+
+[CMUDAProp.AddReg]
+HKCR,CLSID\%CMAudioProperty_CLSID%,,0,%CMAudioProperty_FriendlyName%
+HKCR,CLSID\%CMAudioProperty_CLSID%\InProcServer32,,0,"%10%\System32\udaprop.dll"
+HKCR,CLSID\%CMAudioProperty_CLSID%\ProgID,,0,%CMAudioProperty_ProgID%
+HKCR,CLSID\%CMAudioProperty_CLSID%\VersionIndependentProgID,,0,%CMAudioProperty_VersionIndependentProgID%
+HKCR,CMAudioProperty,,0,%CMAudioProperty_FriendlyName%
+HKCR,CMAudioProperty\CLSID,,0,%CMAudioProperty_CLSID%
+HKCR,CMAudioProperty\CurVer,,0,%CMAudioProperty_ProgID%
+HKCR,CMAudioProperty.7,,0,%CMAudioProperty_FriendlyName%
+HKCR,CMAudioProperty.7\CLSID,,0,%CMAudioProperty_CLSID%
+;HKR,,EnumPropPages32,,"udaprop.dll, CMAudioPropPageProvider"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Control Panel\Cpls",Cmcpls,,"%10%\System\cmicnfg.cpl"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",Cmaudio,,"RunDll32 cmicnfg.cpl,CMICtrlWnd"
+HKLM,%UninstallPath%,DisplayName,,%DiskDescription%
+HKLM,%UninstallPath%,UninstallString,,"%10%\system32\cmirmdrv.exe"
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+HKCU,"Software\Sensaura\Audio3D\Settings","SplashScreen",65537,0,0,0,0
+
+[UDA_NAMES.AddReg]
+HKLM,%MediaCategories%\%UDAGUID.PhoneVolume%,Name,,%UDANode.PhoneVolume%
+HKLM,%MediaCategories%\%UDAGUID.PhoneVolume%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.PhoneMute%,Name,,%UDANode.PhoneMute%
+HKLM,%MediaCategories%\%UDAGUID.PhoneMute%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.MonoOutSelect%,Name,,%UDANode.MonoOutSelect%
+HKLM,%MediaCategories%\%UDAGUID.MonoOutSelect%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.Spdif%,Name,,%UDANode.Spdif%
+HKLM,%MediaCategories%\%UDAGUID.Spdif%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.Video%,Name,,%UDANode.Video%
+HKLM,%MediaCategories%\%UDAGUID.Video%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.StereoMix%,Name,,%UDANode.StereoMix%
+HKLM,%MediaCategories%\%UDAGUID.StereoMix%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.Aux%,Name,,%UDANode.Aux%
+HKLM,%MediaCategories%\%UDAGUID.Aux%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.AuxPhone%,Name,,%UDANode.AuxPhone%
+HKLM,%MediaCategories%\%UDAGUID.AuxPhone%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.MonoIn%,Name,,%UDANode.MonoIn%
+HKLM,%MediaCategories%\%UDAGUID.MonoIn%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.PcBeep%,Name,,%UDANode.PcBeep%
+HKLM,%MediaCategories%\%UDAGUID.PcBeep%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.SpdifValid%,Name,,%UDANode.SpdifValid%
+HKLM,%MediaCategories%\%UDAGUID.SpdifValid%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.WaveRecord%,Name,,%UDANode.WaveRecord%
+HKLM,%MediaCategories%\%UDAGUID.WaveRecord%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.LineIn1%,Name,,%UDANode.LineIn1%
+HKLM,%MediaCategories%\%UDAGUID.LineIn1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.LineIn2%,Name,,%UDANode.LineIn2%
+HKLM,%MediaCategories%\%UDAGUID.LineIn2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.InputMonitor%,Name,,%UDANode.InputMonitor%
+HKLM,%MediaCategories%\%UDAGUID.InputMonitor%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%UDAGUID.LineInAuxIn%,Name,,%UDANode.LineInAuxIn%
+HKLM,%MediaCategories%\%UDAGUID.LineInAuxIn%,Display,1,00,00,00,00
+
+[CMUDASecurity.AddReg]
+HKR,,DeviceType,0x10001,0x0000001D
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GRGWGX;;;BA)(A;;GRGWGX;;;WD)(A;;GRGWGX;;;RC)"
+
+[DestinationDirs]
+CMUDA.CopyList     = 10,system32\drivers
+CMUDAProp.CopyList = 10,system32
+C3D.CopyList       = 10,system
+Impedence.CopyList = 10
+Audio3D.CopyList   = 11
+DefaultDestDir     = 11
+
+[CMUDA.CopyList]
+cmudax.sys
+
+[CMUDAprop.CopyList]
+udaprop.dll
+cmirmdrv.dll
+cmirmdrv.exe
+cmudax.dll
+
+[C3D.CopyList]
+cmids3d.dll
+cmifltr.dll
+cmicnfg.cpl
+
+[Impedence.CopyList]
+ImpTable.bin
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+[Strings]
+ProviderName="C-Media Electronics Inc."
+MfgName="C-Media"
+DiskDescription="C-Media High Definition Audio Driver"
+CMUDA.DeviceDesc="C-Media High Definition Audio Device"
+RearWave.szPname="C-Media Rear Panel Audio"
+RearTopo.szPname="C-Media Rear Panel Mixer"
+FrontWave.szPname="C-Media Front Panel Audio"
+FrontTopo.szPname="C-Media Front Panel Mixer"
+CMUDA.SvcDesc = "C-Media High Definition Audio Interface"
+
+CMI9880.DeviceDesc="C-Media High Definition Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+UninstallPath="Software\Microsoft\Windows\CurrentVersion\Uninstall\C-Media Audio Driver"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_RearWave="AA_Wave"
+KSNAME_RearTopo="AA_Topology"
+KSNAME_FPWave="AB_Wave"
+KSNAME_FPTopo="AB_Topology"
+
+CMAudioProperty_CLSID="{201FEC6C-E94E-450c-8ECB-5297957441A6}"
+CMAudioProperty_FriendlyName="CMAudio WDM Property Component"
+CMAudioProperty_ProgID="CMAudioPropertyCOM.7"
+CMAudioProperty_VersionIndependentProgID="CMAudioPropertyCOM"
+
+;; Nodes (non-localizeable)
+UDAGUID.PhoneVolume     ="{0A8C1A87-42B0-11D2-95D2-00C04FB925D3}"
+UDAGUID.PhoneMute       ="{0A8C1A88-42B0-11D2-95D2-00C04FB925D3}"
+UDAGUID.MonoOutSelect   ="{0A8C1AA9-42B0-11D2-95D2-00C04FB925D3}"
+UDAGUID.Spdif           ="{5AEA5794-AA8A-4aaf-AB8B-4854C97B5D90}"
+UDAGUID.Video           ="{32E06BEE-BD20-48b8-9552-E5240EAF05BC}"
+UDAGUID.StereoMix       ="{3EC8502B-5D89-4d2d-A78A-FF45CA18A3B7}"
+UDAGUID.Aux             ="{AF24C5CC-A32D-479f-9FFB-BFD00E135BA9}"
+UDAGUID.AuxPhone        ="{1A607E05-8C29-43B0-8E60-FB24D266EAE8}"
+UDAGUID.MonoIn          ="{51C53816-3407-4BA0-8B4D-B4FCADC65A54}"
+UDAGUID.PcBeep          ="{697e35a2-97c8-42d1-a138-2de6a64a8bc3}"
+UDAGUID.SpdifValid      ="{D0DF1519-7207-4135-9EFD-934061113FFA}"
+UDAGUID.WaveRecord      ="{209A9FAC-0A88-4ec9-AEF4-84C01BD5477F}"
+UDAGUID.LineIn1         ="{3a8fe731-da60-4bd7-ad6f-7e16e40c8a84}"
+UDAGUID.LineIn2         ="{3b5c45cb-2e4c-4a64-8bf3-5f648ce235d6}"
+UDAGUID.InputMonitor    ="{E23E291E-1B5B-4657-B046-0190383ABCA1}"
+UDAGUID.LineInAuxIn	="{5B9ABF83-F2F9-45f3-8035-9FEB7A56572E}"
+
+;; Nodes (localizeable)
+UDANode.PhoneVolume     ="Phone Volume"
+UDANode.PhoneMute       ="Phone Mute"
+UDANode.MonoOutSelect   ="Mono Out Select"
+UDANode.Spdif           ="SPDIF In"
+UDANode.Video           ="TV Tuner"
+UDANode.StereoMix       ="Stereo Mix"
+UDANode.Aux             ="Aux"
+UDANode.AuxPhone        ="Aux/Phone"
+UDANode.MonoIn          ="Mono In"
+UDANode.PcBeep          ="PC Beep"
+UDANode.SpdifValid      ="Validity Check"
+UDANode.WaveRecord      ="Wave"
+UDANode.LineIn1         ="Front Line-In"
+UDANode.LineIn2         ="Front Line-In 2"
+UDANode.InputMonitor    ="Monitoring"
+UDANode.LineInAuxIn	="Line In/Aux In"
+
+Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"
+

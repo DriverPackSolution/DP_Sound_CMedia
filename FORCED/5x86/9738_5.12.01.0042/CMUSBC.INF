@@ -1,0 +1,72 @@
+; C-Media Inc. Composite Device INF file
+;
+; Feature  : Composite Device INF (WDM)
+; Language : English
+;
+; Date     : 07 April 2003
+; Revision : 1.00.008
+;
+; Copyright 2003, C-Media Inc.
+
+[Version]
+Signature="$CHICAGO$"
+CatalogFile=usb.cat
+LayoutFile=Layout.inf, Layout1.inf, Layout2.inf
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+provider=%MfgName%
+DriverVer =04/07/2003
+
+; =================== Class Sections ===========================
+
+[ClassInstall]
+Addreg=USBClassReg
+
+[USBClassReg]
+HKR,,,,%USBClassName%
+HKR,,Icon,,-20
+
+;=================================================================
+
+[Manufacturer]
+%MfgName%=C-Media
+
+[ControlFlags]
+;ExcludeFromSelect = *
+
+[DestinationDirs]
+DefaultDestDir=10,system32\drivers
+
+[C-Media]
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0D8C&PID_0001
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0D8C&PID_0002
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0D8C&PID_0003
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0D8C&PID_000C
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0D8C&PID_000D
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0D8C&PID_0006
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0E5C&PID_6441
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_0B0E&PID_8100
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_06F8&PID_1000
+%CMI9738_Composite.DeviceDesc%=AC97_Composite, USB\VID_04E8&PID_7081
+
+[AC97_Composite]
+AddReg=AC97_Composite.AddReg
+DelReg=AC97_Composite.DelReg
+
+[AC97_Composite.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,usbhub.sys
+
+[AC97_Compositee.DelReg]
+HKR,,EnumPropPages
+
+
+;;***************** Strings ********************************
+[Strings]
+MfgName                   ="(Standard USB Host Controller)"
+USBClassName              ="Universal Serial Bus controllers"
+CMI9738_Composite.DeviceDesc = "USB Composite Device"
+
+
+
+
